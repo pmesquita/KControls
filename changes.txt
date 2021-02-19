@@ -1,0 +1,12 @@
+Grid:
+	Added Function AddRows(ARows: Integer = 1): Integer
+			-> Add a "ARows" on the grid and return the last row added
+
+	Added Procedure ClearRows;
+			-> Clear all rows of grid except Header
+
+	Added Function SelectedRow: Integer;
+			-> Returns the current row selected
+
+	Changed Function TKCustomGrid.DrawCell..
+			-> Allow to alternate colors OnDrawCell

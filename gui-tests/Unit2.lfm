@@ -1,0 +1,111 @@
+object Form2: TForm2
+  Left = 326
+  Height = 490
+  Top = 141
+  Width = 777
+  Caption = 'Form2'
+  ClientHeight = 490
+  ClientWidth = 777
+  Font.Height = -16
+  Font.Name = 'Times New Roman'
+  OnCreate = FormCreate
+  LCLVersion = '2.0.10.0'
+  object Label1: TLabel
+    Left = 8
+    Height = 19
+    Top = 8
+    Width = 96
+    Caption = 'Selected Row:'
+    Font.Height = -16
+    Font.Name = 'Times New Roman'
+    Font.Style = [fsBold]
+    ParentColor = False
+    ParentFont = False
+  end
+  object Button1: TButton
+    Left = 8
+    Height = 25
+    Top = 128
+    Width = 130
+    Caption = 'Deselect Row'
+    OnClick = Button1Click
+    TabOrder = 0
+  end
+  object Memo1: TMemo
+    Left = 664
+    Height = 147
+    Top = 8
+    Width = 104
+    Lines.Strings = (
+      'Memo1'
+    )
+    TabOrder = 1
+  end
+  object KGrid1: TKGrid
+    Left = 0
+    Height = 322
+    Top = 168
+    Width = 777
+    Align = alBottom
+    Color = 14938339
+    Colors.AlternatingRow = 16113353
+    DefaultColWidth = 150
+    DefaultRowHeight = 22
+    FixedCols = 0
+    FixedRows = 0
+    Options = [goAlwaysShowEditor, goDrawFocusSelected, goEnterMoves, goFixedHorzLine, goFixedVertLine, goHeader, goHeaderAlignment, goHorzLine, goIndicateHiddenCells, goMouseCanHideCells, goMouseOverCells, goRangeSelect, goRowSelect, goRowSorting, goThemes, goThemedCells, goVertLine]
+    RowCount = 1
+    TabOrder = 2
+    OnClick = KGrid1Click
+    OnDrawCell = KGrid1DrawCell
+    ColWidths = (
+      0
+      0
+      0
+      0
+      0
+    )
+    RowHeights = (
+      0
+    )
+  end
+  object Button2: TButton
+    Left = 8
+    Height = 25
+    Top = 96
+    Width = 130
+    Caption = 'Clear Rows'
+    OnClick = Button2Click
+    TabOrder = 3
+  end
+  object Button3: TButton
+    Left = 8
+    Height = 25
+    Top = 32
+    Width = 130
+    Caption = 'Add 5000 Rows'
+    OnClick = Button3Click
+    TabOrder = 4
+  end
+  object Button4: TButton
+    Left = 8
+    Height = 25
+    Top = 64
+    Width = 130
+    Caption = 'Delete Row'
+    OnClick = Button4Click
+    TabOrder = 5
+  end
+  object StringGrid1: TStringGrid
+    Left = 423
+    Height = 100
+    Top = 43
+    Width = 200
+    ColCount = 2
+    Columns = <    
+      item
+        Title.Caption = 'Title'
+      end>
+    TabOrder = 6
+  end
+end
