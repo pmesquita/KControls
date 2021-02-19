@@ -20,7 +20,7 @@ interface
 
 uses
 {$IFDEF FPC}
-  LCLType, LCLIntf, LCLVersion, LMessages, LCLProc, LResources,
+  LCLType, LCLIntf, LCLVersion, LMessages, LCLProc, LResources, Dialogs,
 {$ELSE}
   Windows, Messages,
 {$ENDIF}
@@ -1113,6 +1113,8 @@ const
   // aki:
   { Index for the @link(TKGridColors.SelectedFixedCellBkGnd) property. }
   ciSelectedFixedCellBkGnd = TKGridColorIndex(20);
+  { Index for the @link(TKGridColors.AlternatingRow) property. }
+  ciAlternatingRow = TKGridColorIndex(21);
   // aki:
   { Maximum color array index }
   ciGridColorsMax = ciSelectedFixedCellBkGnd;
@@ -2021,6 +2023,8 @@ type
     { Clears cached brighter colors. }
     procedure ClearBrightColors; override;
   published
+    property AlternatingRow: TColor index ciAlternatingRow read GetColor write SetColor default clWindow;
+
     { Specifies if cell range colors should be brightened from focused cell colors. }
     property BrightRangeBkGnd: Boolean read FBrightRangeBkGnd write FBrightRangeBkGnd default True;
     { Background color for non-fixed cells. }
@@ -2185,6 +2189,7 @@ type
     function GetPreventMouseWheelScroll: Boolean;
     function GetRowHeights(Index: Integer): Integer;
     function GetRows(Index: Integer): TKGridRow;
+    function GetSelectedRow: Integer;
     function GetSelection: TKGridRect;
     function GetSelectionCount: Integer;
     function GetSelectionRect: TRect;
@@ -2786,6 +2791,8 @@ type
     constructor Create(AOwner: TComponent); override;
     { Destroys the instance along with all allocated column, row and cell data. }
     destructor Destroy; override;
+    { Add the lines to the grid and return the last row index }
+    Function AddRows(ARows: Integer = 1): Integer;
     { Programmatically add new selection. Returns index of the newly added selection
       in selection list. Does not alter main selection or any other selections. }
     function AddSelection(ARect: TKGridRect): Integer; virtual;
@@ -2819,6 +2826,8 @@ type
     procedure ClearGrid; virtual;
     { Clears all cells in a row identified by ARow. }
     procedure ClearRow(ARow: Integer); virtual;
+
+    procedure ClearRows; virtual;
     { Programmatically clear all selections from selection list. }
     procedure ClearSelections; virtual;
     { Clears sorting mode of both rows and columns if grid sorting mode is not locked
@@ -3383,6 +3392,8 @@ type
     property Selections[Index: Integer]: TKGridRect read GetSelections write SetSelections;
     { Returns the selection rectangle for given selection index. }
     property SelectionsRect[Index: Integer]: TRect read GetSelectionsRect;
+    { Returns the selected row }
+    property SelectedRow: Integer read GetSelectedRow;
     { Specifies how a column or row appears while being resized by mouse. }
     property SizingStyle: TKGridSizingStyle read FSizingStyle write SetSizingStyle default cSizingStyleDef;
     { Returns index of the column having its SortMode property smDown or smUp.
@@ -6469,6 +6480,17 @@ begin
   FreeData;
 end;
 
+function TKCustomGrid.AddRows(ARows: Integer): Integer;
+begin
+  if (ARows > 0) then
+   begin
+    SetRowCount(FRowCount + ARows);
+    Result:= Pred(FRowCount);
+     If (FixedRows = 0 ) Then
+      FixedRows:= 1;
+   end;
+end;
+
 function TKCustomGrid.AddSelection(ARect: TKGridRect): Integer;
 begin
   Result := FSelections.Add(ARect);
@@ -7052,6 +7074,15 @@ begin
   end;
 end;
 
+procedure TKCustomGrid.ClearRows;
+begin
+  LockUpdate;
+  DeleteRows(1, Pred(FRowCount));
+  UpdateCellSpan;
+  Invalidate;
+  UnlockUpdate;
+end;
+
 procedure TKCustomGrid.ClearSelections;
 begin
   FSelections.Clear;
@@ -7623,8 +7654,21 @@ function TKCustomGrid.DrawCell(ACol, ARow: Integer; ARect: TRect;
   AState: TKGridDrawState): Boolean;
 begin
   Result := True;
+
   if Assigned(FOnDrawCell) then
-    FOnDrawCell(Self, ACol, ARow, ARect, AState)
+    begin
+      FOnDrawCell(Self, ACol, ARow, ARect, AState);
+      // Applies color switching to rows except for the header
+      Cell[ACol, ARow].ApplyDrawProperties;
+      if (ARow > 0) Then
+       begin
+        if ((Arow mod 2) = 1) then
+         Canvas.Brush.Color:= FColors.AlternatingRow
+        else
+         Canvas.Brush.Color:= Color;
+       end;
+      CellPainter.DefaultDraw;
+    end
   else if Assigned(FCells) then with InternalGetCell(ACol, ARow) do
   begin
     ApplyDrawProperties;
@@ -8514,6 +8558,11 @@ begin
     Result := TKGridRow(FRows[Index])
   else
     Result := nil;
+end;
+
+function TKCustomGrid.GetSelectedRow: Integer;
+begin
+  Result:= Row;
 end;
 
 function TKCustomGrid.InternalGetSelAvail: Boolean;
