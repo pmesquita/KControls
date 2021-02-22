@@ -31,16 +31,6 @@ object Form2: TForm2
     OnClick = Button1Click
     TabOrder = 0
   end
-  object Memo1: TMemo
-    Left = 664
-    Height = 147
-    Top = 8
-    Width = 104
-    Lines.Strings = (
-      'Memo1'
-    )
-    TabOrder = 1
-  end
   object KGrid1: TKGrid
     Left = 0
     Height = 322
@@ -49,15 +39,18 @@ object Form2: TForm2
     Align = alBottom
     Color = 14938339
     Colors.AlternatingRow = 16113353
+    Flat = True
     DefaultColWidth = 150
     DefaultRowHeight = 22
     FixedCols = 0
     FixedRows = 0
-    Options = [goAlwaysShowEditor, goDrawFocusSelected, goEnterMoves, goFixedHorzLine, goFixedVertLine, goHeader, goHeaderAlignment, goHorzLine, goIndicateHiddenCells, goMouseCanHideCells, goMouseOverCells, goRangeSelect, goRowSelect, goRowSorting, goThemes, goThemedCells, goVertLine]
+    Options = [goAlwaysShowEditor, goDrawFocusSelected, goEditing, goEnterMoves, goFixedHorzLine, goFixedVertLine, goHeader, goHeaderAlignment, goHorzLine, goIndicateHiddenCells, goMouseCanHideCells, goMouseOverCells, goRangeSelect, goRowSorting, goThemes, goThemedCells, goVertLine]
     RowCount = 1
-    TabOrder = 2
+    TabOrder = 1
     OnClick = KGrid1Click
-    OnDrawCell = KGrid1DrawCell
+    OnEditorCreate = KGrid1EditorCreate
+    OnEditorDataFromGrid = KGrid1EditorDataFromGrid
+    OnEditorDataToGrid = KGrid1EditorDataToGrid
     ColWidths = (
       0
       0
@@ -76,7 +69,7 @@ object Form2: TForm2
     Width = 130
     Caption = 'Clear Rows'
     OnClick = Button2Click
-    TabOrder = 3
+    TabOrder = 2
   end
   object Button3: TButton
     Left = 8
@@ -85,7 +78,7 @@ object Form2: TForm2
     Width = 130
     Caption = 'Add 5000 Rows'
     OnClick = Button3Click
-    TabOrder = 4
+    TabOrder = 3
   end
   object Button4: TButton
     Left = 8
@@ -94,18 +87,36 @@ object Form2: TForm2
     Width = 130
     Caption = 'Delete Row'
     OnClick = Button4Click
+    TabOrder = 4
+  end
+  object Button5: TButton
+    Left = 640
+    Height = 25
+    Top = 32
+    Width = 130
+    Caption = 'Set CombBox'
+    OnClick = Button5Click
     TabOrder = 5
   end
-  object StringGrid1: TStringGrid
-    Left = 423
-    Height = 100
-    Top = 43
-    Width = 200
-    ColCount = 2
-    Columns = <    
-      item
-        Title.Caption = 'Title'
-      end>
+  object Label2: TLabel
+    Left = 208
+    Height = 19
+    Top = 8
+    Width = 100
+    Caption = 'Selected Text: '
+    Font.Height = -16
+    Font.Name = 'Times New Roman'
+    Font.Style = [fsBold]
+    ParentColor = False
+    ParentFont = False
+  end
+  object Button6: TButton
+    Left = 640
+    Height = 25
+    Top = 64
+    Width = 130
+    Caption = 'Set CombBox'
+    OnClick = Button6Click
     TabOrder = 6
   end
 end

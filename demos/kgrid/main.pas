@@ -150,7 +150,6 @@ type
     procedure CBAutosizeGridClick(Sender: TObject);
     procedure KGrid3SelectionExpand(Sender: TObject; ACol, ARow: Integer;
       var CanExpand: Boolean);
-    procedure KGrid1MouseDblClickCell(Sender: TObject; ACol, ARow: Integer);
     procedure KGrid1MouseClickCell(Sender: TObject; ACol, ARow: Integer);
   private
     { Private declarations }
@@ -423,6 +422,7 @@ end;
 procedure TForm1.ACDeleteColExecute(Sender: TObject);
 begin
   KGrid1.DeleteCol(KGrid1.Col);
+
 end;
 
 procedure TForm1.ACDeleteColUpdate(Sender: TObject);
@@ -799,7 +799,9 @@ begin
   begin
     SetControlText(AEditor, S);
     AssignText := False;
-  end;
+  //end;
+end;
+
 end;
 
 procedure TForm1.KGrid1EditorDataToGrid(Sender: TObject; AEditor: TWinControl;
@@ -863,7 +865,7 @@ end;
 procedure TForm1.KGrid1EditorSelect(Sender: TObject; AEditor: TWinControl; ACol,
   ARow: Integer; SelectAll, CaretToLeft, SelectedByMouse: Boolean);
 begin
-  if SelectedByMouse and (KGrid1.InitialCol(ACol) in [4]) then
+  if SelectedByMouse and (KGrid1.InitialCol(ACol) in [2]) then
     KGrid1.ThroughClick := True;
   KGrid1.DefaultEditorSelect(AEditor, ACol, ARow, SelectAll, CaretToLeft, SelectedByMouse);
 end;
@@ -1041,11 +1043,6 @@ begin
     Kgrid1.AddSelection(GridRect(ACol, KGrid1.FixedRows, ACol, KGrid1.RowCount - 1));
 end;
 
-procedure TForm1.KGrid1MouseDblClickCell(Sender: TObject; ACol, ARow: Integer);
-begin
-  ;
-end;
-
 procedure TForm1.FillRows(At, BaseIndex, NumRows: Integer);
 var
   I, J, ACol: Integer;
@@ -1095,6 +1092,7 @@ begin
     settings to the CellPainter. If you write your own cell class make any
     specific drawing adjustments to be accessible through ApplyDrawProperties. }
   Cell.ApplyDrawProperties;
+
   // get cell text
   if (InitialRow = 1) and (InitialCol > 0) then
     // display initial column positions in the (initially) first row

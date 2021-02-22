@@ -12,7 +12,6 @@ object Form1: TForm1
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   Position = poScreenCenter
-  LCLVersion = '1.7'
   object PCMain: TPageControl
     Left = 0
     Height = 603
@@ -345,6 +344,7 @@ object Form1: TForm1
         Align = alLeft
         Anchors = [akTop, akLeft, akRight, akBottom]
         ColCount = 8
+        Colors.AlternatingRow = clBlack
         DefaultRowHeight = 21
         Options = [goAlwaysShowEditor, goColMoving, goColSizing, goDrawFocusSelected, goEditing, goEnterMoves, goFixedHorzLine, goFixedVertLine, goHeader, goHeaderAlignment, goHorzLine, goIndicateHiddenCells, goMouseCanHideCells, goMouseOverCells, goRangeSelect, goRowMoving, goRowSorting, goTabs, goThemes, goThemedCells, goVertLine]
         OptionsEx = [gxEnterAppendsRow, gxEnterWraps, gxFixedCellClickSelect, gxTabAppendsRow, gxTabWraps]
@@ -363,7 +363,6 @@ object Form1: TForm1
         OnEditorSelect = KGrid1EditorSelect
         OnMeasureCell = KGrid1MeasureCell
         OnMouseClickCell = KGrid1MouseClickCell
-        OnMouseDblClickCell = KGrid1MouseDblClickCell
         OnPrintPaint = KGrid1PrintPaint
         ColWidths = (
           0
@@ -439,6 +438,7 @@ object Form1: TForm1
         Width = 830
         Align = alClient
         ColCount = 12
+        Colors.AlternatingRow = clBlack
         DefaultRowHeight = 21
         FixedRows = 3
         Options = [goAlwaysShowEditor, goClippedCells, goColSizing, goDrawFocusSelected, goEditing, goEnterMoves, goFixedHorzLine, goFixedVertLine, goHeaderAlignment, goHorzLine, goIndicateHiddenCells, goMouseCanHideCells, goMouseOverCells, goRangeSelect, goRowMoving, goRowSorting, goTabs, goThemes, goThemedCells, goVertLine]
@@ -497,6 +497,7 @@ object Form1: TForm1
         Width = 830
         Align = alClient
         ColCount = 12
+        Colors.AlternatingRow = clBlack
         DefaultRowHeight = 21
         Options = [goAlwaysShowEditor, goClippedCells, goColMoving, goColSizing, goColSorting, goDrawFocusSelected, goEditing, goEnterMoves, goFixedHorzLine, goFixedVertLine, goHeader, goHeaderAlignment, goHorzLine, goIndicateHiddenCells, goMouseCanHideCells, goMouseOverCells, goRangeSelect, goRowMoving, goRowSorting, goTabs, goThemes, goThemedCells, goVertLine, goVirtualGrid]
         RangeSelectStyle = rsMS_Excel
@@ -549,8 +550,8 @@ object Form1: TForm1
     end
   end
   object ActionList1: TActionList
-    left = 472
-    top = 16
+    Left = 472
+    Top = 16
     object ACAddColBefore: TAction
       Caption = 'Add column before...'
       OnExecute = ACAddColBeforeExecute
@@ -592,12 +593,12 @@ object Form1: TForm1
   object PSDMain: TKPrintSetupDialog
     Control = KGrid1
     SelAvail = False
-    left = 437
-    top = 16
+    Left = 437
+    Top = 16
   end
   object PPDMain: TKPrintPreviewDialog
     Control = KGrid1
-    left = 504
-    top = 16
+    Left = 504
+    Top = 16
   end
 end

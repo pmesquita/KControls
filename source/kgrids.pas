@@ -7658,15 +7658,6 @@ begin
   if Assigned(FOnDrawCell) then
     begin
       FOnDrawCell(Self, ACol, ARow, ARect, AState);
-      // Applies color switching to rows except for the header
-      Cell[ACol, ARow].ApplyDrawProperties;
-      if (ARow > 0) Then
-       begin
-        if ((Arow mod 2) = 1) then
-         Canvas.Brush.Color:= FColors.AlternatingRow
-        else
-         Canvas.Brush.Color:= Color;
-       end;
       CellPainter.DefaultDraw;
     end
   else if Assigned(FCells) then with InternalGetCell(ACol, ARow) do
@@ -7675,6 +7666,28 @@ begin
     DrawCell(ACol, ARow, ARect, AState)
   end else
     Result := False;
+
+  // Applies color switching to rows except for the header
+  Cell[ACol, ARow].ApplyDrawProperties;
+  Case ARow Of
+   0: Begin { Header Font... }
+       Canvas.Font.Name:= 'Times New Roman';
+       Canvas.Font.Size:= 12;
+       Canvas.Font.Style:= [fsBold];
+//       Canvas.a;
+
+      End;
+   Else
+    Begin
+     If ((Arow mod 2) = 1) then
+      Canvas.Brush.Color:= FColors.AlternatingRow
+     Else
+      Canvas.Brush.Color:= Color;
+    End;
+  End;
+
+
+
 end;
 
 function TKCustomGrid.EditorCreate(ACol, ARow: Integer): TWinControl;
