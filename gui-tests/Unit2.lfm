@@ -30,42 +30,6 @@ object Form2: TForm2
     OnClick = Button1Click
     TabOrder = 0
   end
-  object KGrid1: TKGrid
-    Left = 0
-    Height = 322
-    Top = 168
-    Width = 777
-    Align = alBottom
-    Color = 14938339
-    Colors.AlternatingRow = 16113353
-    Flat = True
-    DefaultColWidth = 150
-    DefaultRowHeight = 22
-    FixedCols = 0
-    FixedRows = 0
-    Options = [goAlwaysShowEditor, goDrawFocusSelected, goEditing, goEnterMoves, goFixedHorzLine, goFixedVertLine, goHeader, goHeaderAlignment, goHorzLine, goIndicateHiddenCells, goMouseCanHideCells, goMouseOverCells, goRangeSelect, goRowSorting, goThemes, goThemedCells, goVertLine]
-    RowCount = 1
-    TabOrder = 1
-    OnClick = KGrid1Click
-    OnDrawCell = KGrid1DrawCell
-    OnEditorCreate = KGrid1EditorCreate
-    OnEditorDataFromGrid = KGrid1EditorDataFromGrid
-    OnEditorDataToGrid = KGrid1EditorDataToGrid
-    OnEditorResize = KGrid1EditorResize
-    OnEditorSelect = KGrid1EditorSelect
-    OnMeasureCell = KGrid1MeasureCell
-    OnMouseClickCell = KGrid1MouseClickCell
-    ColWidths = (
-      0
-      0
-      0
-      0
-      0
-    )
-    RowHeights = (
-      0
-    )
-  end
   object Button2: TButton
     Left = 8
     Height = 25
@@ -73,7 +37,7 @@ object Form2: TForm2
     Width = 130
     Caption = 'Clear Rows'
     OnClick = Button2Click
-    TabOrder = 2
+    TabOrder = 1
   end
   object Button3: TButton
     Left = 8
@@ -82,7 +46,7 @@ object Form2: TForm2
     Width = 130
     Caption = 'Add 5000 Rows'
     OnClick = Button3Click
-    TabOrder = 3
+    TabOrder = 2
   end
   object Button4: TButton
     Left = 8
@@ -91,7 +55,7 @@ object Form2: TForm2
     Width = 130
     Caption = 'Delete Row'
     OnClick = Button4Click
-    TabOrder = 4
+    TabOrder = 3
   end
   object Button5: TButton
     Left = 640
@@ -100,7 +64,7 @@ object Form2: TForm2
     Width = 130
     Caption = 'Set CheckBox'
     OnClick = Button5Click
-    TabOrder = 5
+    TabOrder = 4
   end
   object Label2: TLabel
     Left = 208
@@ -121,6 +85,215 @@ object Form2: TForm2
     Width = 130
     Caption = 'Get CheckBox'
     OnClick = Button6Click
+    TabOrder = 5
+  end
+  object SpinEdit1: TSpinEdit
+    Left = 368
+    Height = 27
+    Top = 56
+    Width = 112
+    OnChange = SpinEdit1Change
     TabOrder = 6
+  end
+  object StringGrid1: TStringGrid
+    Left = 0
+    Height = 136
+    Top = 354
+    Width = 777
+    Align = alBottom
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    ColCount = 6
+    Columns = <    
+      item
+        ButtonStyle = cbsButton
+        Title.Alignment = taCenter
+        Title.Font.Height = -16
+        Title.Font.Name = 'Times New Roman'
+        Title.Font.Style = [fsBold]
+        Title.Caption = 'TButton'
+        Width = 200
+      end    
+      item
+        ButtonStyle = cbsButtonColumn
+        Title.Caption = 'TButtonColumn'
+        Width = 115
+      end    
+      item
+        ButtonStyle = cbsCheckboxColumn
+        Title.Caption = 'TCheckBox'
+        Width = 64
+      end    
+      item
+        ButtonStyle = cbsEllipsis
+        Title.Caption = 'Ellipsis'
+        Width = 64
+      end    
+      item
+        ButtonStyle = cbsNone
+        Title.Caption = 'None'
+        Width = 64
+      end    
+      item
+        ButtonStyle = cbsPickList
+        PickList.Strings = (
+          'Texto 001'
+          'Texto 002'
+          'Texto 003'
+          'Texto 004'
+          'Texto 005'
+          'Texto 006'
+          'Texto 007'
+          'Texto 008'
+          'Texto 009'
+          'Texto 010'
+          'Texto 011'
+          'Texto 012'
+          'Texto 013'
+          'Texto 014'
+          'Texto 015'
+          'Texto 016'
+          'Texto 017'
+          'Texto 018'
+          'Texto 019'
+          'Texto 020'
+          'Texto 021'
+          'Texto 022'
+          'Texto 023'
+          'Texto 024'
+          'Texto 025'
+          'Texto 026'
+          'Texto 027'
+          'Texto 028'
+          'Texto 029'
+          'Texto 030'
+          'Texto 031'
+          'Texto 032'
+          'Texto 033'
+          'Texto 034'
+          'Texto 035'
+          'Texto 036'
+          'Texto 037'
+          'Texto 038'
+          'Texto 039'
+          'Texto 040'
+          'Texto 041'
+          'Texto 042'
+          'Texto 043'
+          'Texto 044'
+          'Texto 045'
+          'Texto 046'
+          'Texto 047'
+          'Texto 048'
+          'Texto 049'
+          'Texto 050'
+          'Texto 051'
+          'Texto 052'
+          'Texto 053'
+          'Texto 054'
+          'Texto 055'
+          'Texto 056'
+          'Texto 057'
+          'Texto 058'
+          'Texto 059'
+          'Texto 060'
+          'Texto 061'
+          'Texto 062'
+          'Texto 063'
+          'Texto 064'
+          'Texto 065'
+          'Texto 066'
+          'Texto 067'
+          'Texto 068'
+          'Texto 069'
+          'Texto 070'
+          'Texto 071'
+          'Texto 072'
+          'Texto 073'
+          'Texto 074'
+          'Texto 075'
+          'Texto 076'
+          'Texto 077'
+          'Texto 078'
+          'Texto 079'
+          'Texto 080'
+          'Texto 081'
+          'Texto 082'
+          'Texto 083'
+          'Texto 084'
+          'Texto 085'
+          'Texto 086'
+          'Texto 087'
+          'Texto 088'
+          'Texto 089'
+          'Texto 090'
+          'Texto 091'
+          'Texto 092'
+          'Texto 093'
+          'Texto 094'
+          'Texto 095'
+          'Texto 096'
+          'Texto 097'
+          'Texto 098'
+          'Texto 099'
+          'Texto 100'
+          'Texto 101'
+          'Texto 102'
+          'Texto 103'
+          'Texto 104'
+          'Texto 105'
+          'Texto 106'
+          'Texto 107'
+          'Texto 108'
+          'Texto 109'
+          'Texto 110'
+          'Texto 111'
+          'Texto 112'
+          'Texto 113'
+          'Texto 114'
+        )
+        Title.Caption = 'PickList'
+        Width = 150
+      end>
+    FixedCols = 0
+    Flat = True
+    Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goEditing, goRowSelect, goAlwaysShowEditor, goSmoothScroll]
+    ScrollBars = ssVertical
+    TabOrder = 7
+    TitleStyle = tsNative
+    OnButtonClick = StringGrid1ButtonClick
+    OnSelectEditor = StringGrid1SelectEditor
+    ColWidths = (
+      200
+      115
+      64
+      64
+      64
+      150
+    )
+    Cells = (
+      2
+      0
+      0
+      'asdasd'
+      1
+      0
+      'asdfasdf'
+    )
+  end
+  object ComboBox1: TComboBox
+    Left = 244
+    Height = 27
+    Top = 54
+    Width = 100
+    ItemHeight = 19
+    TabOrder = 8
+    Text = 'ComboBox1'
+  end
+  object NewGrid1: TNewGrid
+    Left = 8
+    Height = 184
+    Top = 160
+    Width = 762
+    TabOrder = 9
   end
 end

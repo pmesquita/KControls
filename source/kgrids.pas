@@ -2189,7 +2189,6 @@ type
     function GetPreventMouseWheelScroll: Boolean;
     function GetRowHeights(Index: Integer): Integer;
     function GetRows(Index: Integer): TKGridRow;
-    function GetSelectedRow: Integer;
     function GetSelection: TKGridRect;
     function GetSelectionCount: Integer;
     function GetSelectionRect: TRect;
@@ -2791,8 +2790,6 @@ type
     constructor Create(AOwner: TComponent); override;
     { Destroys the instance along with all allocated column, row and cell data. }
     destructor Destroy; override;
-    { Add the lines to the grid and return the last row index }
-    Function AddRows(ARows: Integer = 1): Integer;
     { Programmatically add new selection. Returns index of the newly added selection
       in selection list. Does not alter main selection or any other selections. }
     function AddSelection(ARect: TKGridRect): Integer; virtual;
@@ -3392,8 +3389,6 @@ type
     property Selections[Index: Integer]: TKGridRect read GetSelections write SetSelections;
     { Returns the selection rectangle for given selection index. }
     property SelectionsRect[Index: Integer]: TRect read GetSelectionsRect;
-    { Returns the selected row }
-    property SelectedRow: Integer read GetSelectedRow;
     { Specifies how a column or row appears while being resized by mouse. }
     property SizingStyle: TKGridSizingStyle read FSizingStyle write SetSizingStyle default cSizingStyleDef;
     { Returns index of the column having its SortMode property smDown or smUp.
@@ -6480,17 +6475,6 @@ begin
   FreeData;
 end;
 
-function TKCustomGrid.AddRows(ARows: Integer): Integer;
-begin
-  if (ARows > 0) then
-   begin
-    SetRowCount(FRowCount + ARows);
-    Result:= Pred(FRowCount);
-     If (FixedRows = 0 ) Then
-      FixedRows:= 1;
-   end;
-end;
-
 function TKCustomGrid.AddSelection(ARect: TKGridRect): Integer;
 begin
   Result := FSelections.Add(ARect);
@@ -8571,11 +8555,6 @@ begin
     Result := TKGridRow(FRows[Index])
   else
     Result := nil;
-end;
-
-function TKCustomGrid.GetSelectedRow: Integer;
-begin
-  Result:= Row;
 end;
 
 function TKCustomGrid.InternalGetSelAvail: Boolean;

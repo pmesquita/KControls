@@ -150,6 +150,7 @@ type
     procedure CBAutosizeGridClick(Sender: TObject);
     procedure KGrid3SelectionExpand(Sender: TObject; ACol, ARow: Integer;
       var CanExpand: Boolean);
+    procedure KGrid1MouseDblClickCell(Sender: TObject; ACol, ARow: Integer);
     procedure KGrid1MouseClickCell(Sender: TObject; ACol, ARow: Integer);
   private
     { Private declarations }
@@ -420,10 +421,28 @@ begin
 end;
 
 procedure TForm1.ACDeleteColExecute(Sender: TObject);
-begin
-  KGrid1.DeleteCol(KGrid1.Col);
+Var
+  Cell: TMyTextCell;
+ Begin
+  // Cell property demo - you won't probably need this but it is possible:
+  Cell := TMyTextCell.Create(nil);
+  try
+    Cell.Text := '';
+    Cell.CheckBoxState := cbUnChecked;
+    KGrid1.Cell[4, 5] := Cell; // Cell is copied, we must destroy it
+  finally
+    Cell.Free;
+  end;
 
-end;
+ end;
+
+//begin
+//  //KGrid1.DeleteCol(KGrid1.Col);
+//  KGrid1.LockUpdate;
+//  TMyTextCell(KGrid1.Cell[4, 4]).CheckBoxState:= cbChecked;
+//  KGrid1.UnlockUpdate;
+//
+//end;
 
 procedure TForm1.ACDeleteColUpdate(Sender: TObject);
 begin
@@ -799,9 +818,7 @@ begin
   begin
     SetControlText(AEditor, S);
     AssignText := False;
-  //end;
-end;
-
+  end;
 end;
 
 procedure TForm1.KGrid1EditorDataToGrid(Sender: TObject; AEditor: TWinControl;
@@ -865,7 +882,7 @@ end;
 procedure TForm1.KGrid1EditorSelect(Sender: TObject; AEditor: TWinControl; ACol,
   ARow: Integer; SelectAll, CaretToLeft, SelectedByMouse: Boolean);
 begin
-  if SelectedByMouse and (KGrid1.InitialCol(ACol) in [2]) then
+  if SelectedByMouse and (KGrid1.InitialCol(ACol) in [4]) then
     KGrid1.ThroughClick := True;
   KGrid1.DefaultEditorSelect(AEditor, ACol, ARow, SelectAll, CaretToLeft, SelectedByMouse);
 end;
@@ -1043,6 +1060,11 @@ begin
     Kgrid1.AddSelection(GridRect(ACol, KGrid1.FixedRows, ACol, KGrid1.RowCount - 1));
 end;
 
+procedure TForm1.KGrid1MouseDblClickCell(Sender: TObject; ACol, ARow: Integer);
+begin
+  ;
+end;
+
 procedure TForm1.FillRows(At, BaseIndex, NumRows: Integer);
 var
   I, J, ACol: Integer;
@@ -1060,7 +1082,7 @@ begin
           1: S := 'edited text';
           2: S := 'item';
           3: S := 'button';
-          4: S := 'option';
+          4: S := '';
           5: S := 'scroll';
           6: S := {$IFDEF FPC}'memo'{$ELSE}'richedit'{$ENDIF};
           7: S := '12:00';
@@ -1092,7 +1114,6 @@ begin
     settings to the CellPainter. If you write your own cell class make any
     specific drawing adjustments to be accessible through ApplyDrawProperties. }
   Cell.ApplyDrawProperties;
-
   // get cell text
   if (InitialRow = 1) and (InitialCol > 0) then
     // display initial column positions in the (initially) first row
@@ -1131,7 +1152,9 @@ begin
         task. That's why I encapsulated this task into TKGridCellPainter. }
       KGrid1.CellPainter.CheckBox := True;
       KGrid1.CellPainter.CheckBoxState := TMyTextCell(KGrid1.Cell[ACol, ARow]).CheckBoxState;
-//      KGrid1.CellPainter.CheckBoxHAlign := halRight;
+      KGrid1.CellPainter.CheckBoxHAlign := halJustify;
+      KGrid1.CellPainter.CheckBoxHPadding:= 15;
+
     {$IFDEF LCLQT}
       // QT workaround: QT cannot draw checkbox transparent here
       if gdEdited in State then
