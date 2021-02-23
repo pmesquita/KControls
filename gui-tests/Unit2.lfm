@@ -9,7 +9,6 @@ object Form2: TForm2
   Font.Height = -16
   Font.Name = 'Times New Roman'
   OnCreate = FormCreate
-  LCLVersion = '2.0.10.0'
   object Label1: TLabel
     Left = 8
     Height = 19
@@ -48,9 +47,14 @@ object Form2: TForm2
     RowCount = 1
     TabOrder = 1
     OnClick = KGrid1Click
+    OnDrawCell = KGrid1DrawCell
     OnEditorCreate = KGrid1EditorCreate
     OnEditorDataFromGrid = KGrid1EditorDataFromGrid
     OnEditorDataToGrid = KGrid1EditorDataToGrid
+    OnEditorResize = KGrid1EditorResize
+    OnEditorSelect = KGrid1EditorSelect
+    OnMeasureCell = KGrid1MeasureCell
+    OnMouseClickCell = KGrid1MouseClickCell
     ColWidths = (
       0
       0
@@ -94,7 +98,7 @@ object Form2: TForm2
     Height = 25
     Top = 32
     Width = 130
-    Caption = 'Set CombBox'
+    Caption = 'Set CheckBox'
     OnClick = Button5Click
     TabOrder = 5
   end
@@ -115,7 +119,7 @@ object Form2: TForm2
     Height = 25
     Top = 64
     Width = 130
-    Caption = 'Set CombBox'
+    Caption = 'Get CheckBox'
     OnClick = Button6Click
     TabOrder = 6
   end
